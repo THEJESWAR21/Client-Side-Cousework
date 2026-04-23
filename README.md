@@ -1,4 +1,11 @@
-## Introduction
+## Student Details
+
+**Student Name:** Thejeswar Dinesh Jeeva
+
+**Student UOW ID:** w2153390
+
+**Student IIT ID:** 20232892
+
 The Smart Campus API is a RESTful service designed to manage rooms and sensors within a campus environment. It allows clients to create and manage rooms, assign sensors to those rooms, and record sensor readings. The API follows REST principles using standard HTTP methods and resource-based URIs. It is implemented using Java with Jersey (JAX-RS) and runs on a Grizzly HTTP server.
 
 ---
@@ -69,9 +76,82 @@ smart-campus-api/
 
 ## Build and Run
 
-To run the project, Java 17 and Maven must be installed. First, navigate to the project directory and execute `mvn clean install` to build the application. After a successful build, run the main class using Maven or directly from the IDE. The server will start at `http://localhost:8080/api/v1/`, and all endpoints can be tested using tools like Postman.
+To run this project, ensure that Git, Java 17, and Maven are installed on your system.
+
+ First, clone the repository from GitHub using `git clone https://github.com/<your-username>/smart-campus-api.git`, 
+ 
+ then navigate into the project directory using `cd smart-campus-api`. 
+ 
+ Once inside the project, build it by running `mvn clean install`, which will compile the code and download all required dependencies. 
+ 
+ After a successful build, start the application using `mvn exec:java -Dexec.mainClass="com.smartcampus.SmartCampusApi"`.
+ 
+  When the server starts, it will be accessible at `http://localhost:8080/api/v1/`, and you can test the API endpoints using tools such as Postman or curl. Ensure that Java 17 is being used by running `java -version`, and make sure that port 8080 is not occupied by another application. To stop the server, terminate the process using `Ctrl + C`.
 
 ---
+
+---
+
+## Sample CURL Commands
+
+Below are sample curl commands demonstrating successful interactions with different parts of the API.
+
+### 1. Create a Room
+
+```bash
+curl -X POST http://localhost:8080/api/v1/rooms \
+-H "Content-Type: application/json" \
+-d '{
+  "id": "ROOM-001",
+  "name": "Lecture Hall",
+  "capacity": 100
+}'
+```
+
+### 2. Get All Rooms
+
+```bash
+curl -X GET http://localhost:8080/api/v1/rooms
+```
+---
+
+### 3. Create a Sensor
+
+```bash
+curl -X POST http://localhost:8080/api/v1/sensors \
+-H "Content-Type: application/json" \
+-d '{
+  "id": "TEMP-001",
+  "type": "Temperature",
+  "status": "ACTIVE",
+  "currentValue": 0,
+  "roomId": "ROOM-001"
+}'
+```
+
+### 4. Add a Sensor Reading
+
+```bash
+curl -X PUT http://localhost:8080/api/v1/sensors/TEMP-001/reading \
+-H "Content-Type: application/json" \
+-d '{
+  "value": 25.5
+}'
+```
+
+### 5. Get Sensors in a Room
+
+```bash
+curl -X GET http://localhost:8080/api/v1/rooms/ROOM-001/sensors
+```
+
+### 6. Delete a Room
+
+```bash
+curl -X DELETE http://localhost:8080/api/v1/rooms/ROOM-001
+```
+
+
 
 # Smart Campus API – Conceptual Report (Questions & Answers)
 
