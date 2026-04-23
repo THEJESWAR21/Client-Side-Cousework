@@ -1,12 +1,7 @@
 package com.smartcampus.mapper;
 
-/**
- *
- * @author Thej
- */
-
 import com.smartcampus.exception.ResourceNotFoundException;
-import com.smartcampus.model.ErrorResponse;
+import com.smartcampus.exception.ErrorResponse;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -18,10 +13,7 @@ public class ResourceNotFoundMapper implements ExceptionMapper<ResourceNotFoundE
     @Override
     public Response toResponse(ResourceNotFoundException ex) {
 
-        ErrorResponse error = new ErrorResponse(
-                Response.Status.NOT_FOUND.getStatusCode(),
-                ex.getMessage()
-        );
+        ErrorResponse error = new ErrorResponse(404, ex.getMessage());
 
         return Response.status(Response.Status.NOT_FOUND)
                 .entity(error)
