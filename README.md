@@ -6,6 +6,7 @@
 
 **Student IIT ID:** 20232892
 
+## Introduction
 The Smart Campus API is a RESTful service designed to manage rooms and sensors within a campus environment. It allows clients to create and manage rooms, assign sensors to those rooms, and record sensor readings. The API follows REST principles using standard HTTP methods and resource-based URIs. It is implemented using Java with Jersey (JAX-RS) and runs on a Grizzly HTTP server.
 
 ---
