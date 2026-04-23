@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.smartcampus.mapper;
 
 /**
@@ -10,12 +6,25 @@ package com.smartcampus.mapper;
  */
 
 import com.smartcampus.exception.ResourceNotFoundException;
+import com.smartcampus.model.ErrorResponse;
+
 import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.*;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 @Provider
 public class ResourceNotFoundMapper implements ExceptionMapper<ResourceNotFoundException> {
+
+    @Override
     public Response toResponse(ResourceNotFoundException ex) {
-        return Response.status(404).entity(ex.getMessage()).build();
+
+        ErrorResponse error = new ErrorResponse(
+                Response.Status.NOT_FOUND.getStatusCode(),
+                ex.getMessage()
+        );
+
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(error)
+                .build();
     }
 }

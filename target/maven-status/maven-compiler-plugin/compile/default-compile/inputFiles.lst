@@ -1,11 +1,15 @@
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\config\ApplicationConfig.java
+C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\exception\BadRequestException.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\exception\ResourceNotFoundException.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\filter\LoggingFilter.java
+C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\mapper\BadRequestMapper.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\mapper\GenericExceptionMapper.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\mapper\ResourceNotFoundMapper.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\model\Booking.java
+C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\model\ErrorResponse.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\model\Room.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\model\Sensor.java
+C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\model\SensorReading.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\resource\DiscoveryResource.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\resource\RoomResource.java
 C:\Users\Thej\Documents\IIT-College\Client-Side-Coursework\smart-campus-api\src\main\java\com\smartcampus\resource\SensorResource.java

@@ -2,10 +2,14 @@ com\smartcampus\model\Sensor.class
 com\smartcampus\model\Booking.class
 com\smartcampus\SmartCampusApi.class
 com\smartcampus\config\ApplicationConfig.class
+com\smartcampus\exception\BadRequestException.class
 com\smartcampus\exception\ResourceNotFoundException.class
 com\smartcampus\storage\DataStore.class
+com\smartcampus\model\ErrorResponse.class
+com\smartcampus\mapper\BadRequestMapper.class
 com\smartcampus\mapper\GenericExceptionMapper.class
 com\smartcampus\filter\LoggingFilter.class
 com\smartcampus\model\Room.class
 com\smartcampus\mapper\ResourceNotFoundMapper.class
 com\smartcampus\resource\TestResource.class
+com\smartcampus\model\SensorReading.class

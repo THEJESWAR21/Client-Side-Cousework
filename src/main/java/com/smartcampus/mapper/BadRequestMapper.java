@@ -5,25 +5,25 @@ package com.smartcampus.mapper;
  * @author Thej
  */
 
+import com.smartcampus.exception.BadRequestException;
 import com.smartcampus.model.ErrorResponse;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-
 @Provider
-public class GenericExceptionMapper implements ExceptionMapper<Exception> {
+public class BadRequestMapper implements ExceptionMapper<BadRequestException> {
 
     @Override
-    public Response toResponse(Exception ex) {
+    public Response toResponse(BadRequestException ex) {
 
         ErrorResponse error = new ErrorResponse(
-                Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),
-                "Internal Server Error"
+                Response.Status.BAD_REQUEST.getStatusCode(),
+                ex.getMessage()
         );
 
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+        return Response.status(Response.Status.BAD_REQUEST)
                 .entity(error)
                 .build();
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.smartcampus.storage;
 
 import com.smartcampus.model.*;
@@ -12,20 +8,27 @@ import java.util.*;
  * @author Thej
  */
 public class DataStore {
-    public static Map<Integer, Room> rooms = new HashMap<>();
-    public static Map<Integer, Sensor> sensors = new HashMap<>();
-    public static Map<Integer, Booking> bookings = new HashMap<>();
+    public static Map<String, Room> rooms = new HashMap<>();
+    public static Map<String, Sensor> sensors = new HashMap<>();
+    public static Map<String, List<SensorReading>> readings = new HashMap<>();
 
     static {
-        rooms.put(1, new Room(1, "Lab A", 30));
-        rooms.put(2, new Room(2, "Hall", 100));
+        Room r1 = new Room("ROOM-001", "Library", 50);
+        Room r2 = new Room("ROOM-002", "Lab", 30);
 
-        Sensor s1 = new Sensor(1, "Temperature", "22C");
-        s1.setRoomId(1);
-        sensors.put(1, s1);
+        rooms.put(r1.getId(), r1);
+        rooms.put(r2.getId(), r2);
 
-        Sensor s2 = new Sensor(2, "Humidity", "60%");
-        s2.setRoomId(2);
-        sensors.put(2, s2);
+        Sensor s1 = new Sensor("TEMP-001", "Temperature", "ACTIVE", 22.5, "ROOM-001");
+        Sensor s2 = new Sensor("HUM-001", "Humidity", "ACTIVE", 60.0, "ROOM-002");
+
+        sensors.put(s1.getId(), s1);
+        sensors.put(s2.getId(), s2);
+
+        r1.getSensorIds().add(s1.getId());
+        r2.getSensorIds().add(s2.getId());
+
+        readings.put(s1.getId(), new ArrayList<>());
+        readings.put(s2.getId(), new ArrayList<>());
     }
 }

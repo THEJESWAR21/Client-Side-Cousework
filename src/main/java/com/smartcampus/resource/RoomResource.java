@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.smartcampus.resource;
 
 import com.smartcampus.model.Room;
 import com.smartcampus.model.Sensor;
 import com.smartcampus.storage.DataStore;
 import com.smartcampus.exception.ResourceNotFoundException;
+import com.smartcampus.exception.BadRequestException;
+
 
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Path("/rooms")
@@ -26,45 +22,85 @@ import java.util.stream.Collectors;
  */
 public class RoomResource {
 
+     // GET all rooms
     @GET
     public Collection<Room> getAllRooms() {
         return DataStore.rooms.values();
     }
 
+    // GET room by ID
     @GET
     @Path("/{id}")
-    public Room getRoom(@PathParam("id") int id) {
+    public Room getRoom(@PathParam("id") String id) {
         Room room = DataStore.rooms.get(id);
-        if (room == null) throw new ResourceNotFoundException("Room not found");
+
+        if (room == null) {
+            throw new ResourceNotFoundException("Room not found");
+        }
+
         return room;
     }
 
+    // CREATE new room
     @POST
-    public Room addRoom(Room room) {
-        int id = DataStore.rooms.size() + 1;
-        room.setId(id);
-        DataStore.rooms.put(id, room);
+    public Room createRoom(Room room) {
+
+        if (room.getId() == null || room.getId().isBlank()) {
+            throw new BadRequestException("Room ID is required");
+        }
+
+        if (room.getName() == null || room.getName().isBlank()) {
+            throw new BadRequestException("Room name is required");
+        }
+
+        if (room.getCapacity() <= 0) {
+            throw new BadRequestException("Capacity must be greater than 0");
+        }
+
+        if (DataStore.rooms.containsKey(room.getId())) {
+            throw new BadRequestException("Room with this ID already exists");
+        }
+
+        DataStore.rooms.put(room.getId(), room);
+
         return room;
     }
 
+    // DELETE room
     @DELETE
     @Path("/{id}")
-    public String deleteRoom(@PathParam("id") int id) {
-        if (DataStore.rooms.remove(id) == null)
+    public String deleteRoom(@PathParam("id") String id) {
+
+        Room removed = DataStore.rooms.remove(id);
+
+        if (removed == null) {
             throw new ResourceNotFoundException("Room not found");
-        return "Deleted";
+        }
+
+        return "Room deleted successfully";
     }
 
-    // 🔥 Sub-resource
+    // SUB-RESOURCE: Get all sensors in a room
     @GET
-    @Path("/{roomId}/sensors")
-    public List<Sensor> getSensorsByRoom(@PathParam("roomId") int roomId) {
-        if (!DataStore.rooms.containsKey(roomId))
-            throw new ResourceNotFoundException("Room not found");
+    @Path("/{id}/sensors")
+    public List<Sensor> getSensorsByRoom(@PathParam("id") String id) {
 
-        return DataStore.sensors.values()
-                .stream()
-                .filter(s -> s.getRoomId() == roomId)
-                .collect(Collectors.toList());
+        Room room = DataStore.rooms.get(id);
+
+        if (room == null) {
+            throw new ResourceNotFoundException("Room not found");
+        }
+
+        List<Sensor> sensors = new ArrayList<>();
+
+        for (String sensorId : room.getSensorIds()) {
+            Sensor sensor = DataStore.sensors.get(sensorId);
+
+            if (sensor != null) {
+                sensors.add(sensor);
+            }
+        }
+
+        return sensors;
     }
 }
