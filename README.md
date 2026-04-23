@@ -1,3 +1,13 @@
+# Smart Campus: Sensor & Room Management API
+
+**School Of Computing Informatics Institute of Technology**
+ 
+**5COSC022C.2:** Client-Server Architectures
+
+**Coursework Type:** Individual Java project
+
+
+
 ## Student Details
 
 **Student Name:** Thejeswar Dinesh Jeeva
@@ -5,6 +15,8 @@
 **Student UOW ID:** w2153390
 
 **Student IIT ID:** 20232892
+
+---
 
 ## Introduction
 The Smart Campus API is a RESTful service designed to manage rooms and sensors within a campus environment. It allows clients to create and manage rooms, assign sensors to those rooms, and record sensor readings. The API follows REST principles using standard HTTP methods and resource-based URIs. It is implemented using Java with Jersey (JAX-RS) and runs on a Grizzly HTTP server.
