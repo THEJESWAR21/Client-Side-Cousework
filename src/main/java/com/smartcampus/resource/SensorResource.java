@@ -6,10 +6,10 @@ package com.smartcampus.resource;
 
 import com.smartcampus.model.Sensor;
 import com.smartcampus.storage.DataStore;
+import com.smartcampus.exception.ResourceNotFoundException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 @Path("/sensors")
@@ -19,52 +19,47 @@ import java.util.Collection;
  *
  * @author Thej
  */
+
+
 public class SensorResource {
-      // GET all sensors
-    @GET
+  @GET
     public Collection<Sensor> getAllSensors() {
         return DataStore.sensors.values();
     }
 
-    // GET sensor by ID
     @GET
     @Path("/{id}")
-    public Response getSensor(@PathParam("id") int id) {
-        Sensor sensor = DataStore.sensors.get(id);
-
-        if (sensor == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Sensor not found")
-                    .build();
-        }
-
-        return Response.ok(sensor).build();
+    public Sensor getSensor(@PathParam("id") int id) {
+        Sensor s = DataStore.sensors.get(id);
+        if (s == null) throw new ResourceNotFoundException("Sensor not found");
+        return s;
     }
 
-    // POST new sensor
     @POST
-    public Response addSensor(Sensor sensor) {
+    public Sensor addSensor(Sensor sensor) {
         int id = DataStore.sensors.size() + 1;
         sensor.setId(id);
         DataStore.sensors.put(id, sensor);
-
-        return Response.status(Response.Status.CREATED)
-                .entity(sensor)
-                .build();
+        return sensor;
     }
 
-    // DELETE sensor
     @DELETE
     @Path("/{id}")
-    public Response deleteSensor(@PathParam("id") int id) {
-        Sensor removed = DataStore.sensors.remove(id);
+    public String deleteSensor(@PathParam("id") int id) {
+        if (DataStore.sensors.remove(id) == null)
+            throw new ResourceNotFoundException("Sensor not found");
+        return "Deleted";
+    }
 
-        if (removed == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Sensor not found")
-                    .build();
-        }
+    // 🌡️ Sensor reading update
+    @PUT
+    @Path("/{id}/reading")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Sensor updateReading(@PathParam("id") int id, String value) {
+        Sensor s = DataStore.sensors.get(id);
+        if (s == null) throw new ResourceNotFoundException("Sensor not found");
 
-        return Response.ok("Sensor deleted").build();
+        s.setValue(value);
+        return s;
     }
 }

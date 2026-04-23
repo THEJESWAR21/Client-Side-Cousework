@@ -9,7 +9,7 @@ package com.smartcampus.model;
  * @author Thej
  */
 public class Booking {
-     private int id;
+    private int id;
     private int roomId;
     private String timeSlot;
 

@@ -9,9 +9,10 @@ package com.smartcampus.model;
  * @author Thej
  */
 public class Sensor {
-      private int id;
+    private int id;
     private String type;
     private String value;
+    private int roomId;
 
     public Sensor() {}
 
@@ -29,4 +30,7 @@ public class Sensor {
 
     public String getValue() { return value; }
     public void setValue(String value) { this.value = value; }
+
+    public int getRoomId() { return roomId; }
+    public void setRoomId(int roomId) { this.roomId = roomId; }
 }

@@ -30,12 +30,7 @@ public class SmartCampusApi {
     public static void main(String[] args) {
         HttpServer server = startServer();
 
-        System.out.println("Server running at http://localhost:8080/api/v1/");
-        System.out.println("Test endpoint: http://localhost:8080/api/v1/test");
-
-        // Check Java version
-        System.out.println("Java version: " + System.getProperty("java.version"));
-
+        System.out.println("Server running at " + BASE_URI);
         Runtime.getRuntime().addShutdownHook(new Thread(server::shutdownNow));
 
         try {
