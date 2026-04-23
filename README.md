@@ -50,7 +50,6 @@ smart-campus-api/
     ├── SmartCampusAPI.java                          
     ├── model/
     │   ├── Booking.java                      
-    │   ├── ErrorResponse.java                    
     │   ├── Room.java      
     │   ├── Sensor.java                                  
     │   ├── SensorReading.java                        
@@ -59,17 +58,25 @@ smart-campus-api/
     ├── resource/
     │   ├── DiscoveryResource.java         
     │   ├── RoomResource.java              
-    │   ├── SensorResource.java            
+    │   ├── SensorResource.java  
+    │   ├── SensorReadingResource.java    
     │   └── TestResource.java     
     ├── exception/
     │   ├── BadRequestException.java     
     │   ├── ResourceNotFoundException.java  
+    │   ├── ErrorResponse.java  
+    │   ├── LinkedResourceNotFoundException.java  
+    │   ├── SensorUnavailableException.java  
     ├── mapper/
     │   ├── BadRequestMapper.java             
-    │   ├── GenericExceptionMapper.java
+    │   ├── GlobalExceptionMapper.java
+    │   ├── LinkedResourceNotFoundException.java
     │   ├── ResourceNotFoundMapper.java
-    └── filter/
-        └── LoggingFilter.java             
+    │   ├── SensorUnavailableExceptionMapper.java
+    ├── filter/
+    │   ├── LoggingFilter.java
+    └── config/
+        └── ApplicationConfig.java                    
 ```
 
 
